@@ -1,6 +1,6 @@
 import { ADD, DELETE, ERROR, Informer, ListPromise, ObjectCallback, UPDATE } from './informer';
 import { KubernetesObject } from './types';
-import { Watch } from './watch';
+import { RequestResult, Watch } from './watch';
 
 export interface ObjectCache<T> {
     get(name: string, namespace?: string): T | undefined;
@@ -12,6 +12,7 @@ export class ListWatch<T extends KubernetesObject> implements ObjectCache<T>, In
     private resourceVersion: string;
     private readonly indexCache: { [key: string]: T[] } = {};
     private readonly callbackCache: { [key: string]: Array<ObjectCallback<T>> } = {};
+    private request: RequestResult | null;
 
     public constructor(
         private readonly path: string,
@@ -23,6 +24,7 @@ export class ListWatch<T extends KubernetesObject> implements ObjectCache<T>, In
         this.callbackCache[UPDATE] = [];
         this.callbackCache[DELETE] = [];
         this.callbackCache[ERROR] = [];
+        this.request = null;
         this.resourceVersion = '';
         if (autoStart) {
             this.doneHandler(null);
@@ -73,6 +75,10 @@ export class ListWatch<T extends KubernetesObject> implements ObjectCache<T>, In
     }
 
     private async doneHandler(err: any) {
+        if (this.request != null) {
+            this.request.destroy();
+            this.request = null;
+        }
         if (err) {
             this.callbackCache[ERROR].forEach((elt: ObjectCallback<T>) => elt(err));
             return;
@@ -85,7 +91,7 @@ export class ListWatch<T extends KubernetesObject> implements ObjectCache<T>, In
         const list = result.body;
         deleteItems(this.objects, list.items, this.callbackCache[DELETE].slice());
         this.addOrUpdateItems(list.items);
-        await this.watch.watch(
+        this.request = await this.watch.watch(
             this.path,
             { resourceVersion: list.metadata!.resourceVersion },
             this.watchHandler.bind(this),

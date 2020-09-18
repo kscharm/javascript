@@ -1,5 +1,6 @@
 import byline = require('byline');
 import request = require('request');
+import { Duplex } from 'stream';
 import { KubeConfig } from './config';
 
 export interface WatchUpdate {
@@ -7,12 +8,17 @@ export interface WatchUpdate {
     object: object;
 }
 
+export interface RequestResult {
+    pipe(stream: Duplex);
+    destroy();
+}
+
 export interface RequestInterface {
-    webRequest(opts: request.Options, callback: (err, response, body) => void): any;
+    webRequest(opts: request.Options, callback: (err, response, body) => void): RequestResult;
 }
 
 export class DefaultRequest implements RequestInterface {
-    public webRequest(opts: request.Options, callback: (err, response, body) => void): any {
+    public webRequest(opts: request.Options, callback: (err, response, body) => void): RequestResult {
         return request(opts, callback);
     }
 }
@@ -53,6 +59,7 @@ export class Watch {
             uri: url,
             useQuerystring: true,
             json: true,
+            pool: false,
         };
         await this.config.applyToRequest(requestOptions);
 

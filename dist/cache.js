@@ -10,12 +10,11 @@ class ListWatch {
         this.objects = [];
         this.indexCache = {};
         this.callbackCache = {};
-        this.watch = watch;
-        this.listFn = listFn;
         this.callbackCache[informer_1.ADD] = [];
         this.callbackCache[informer_1.UPDATE] = [];
         this.callbackCache[informer_1.DELETE] = [];
         this.callbackCache[informer_1.ERROR] = [];
+        this.request = null;
         this.resourceVersion = '';
         if (autoStart) {
             this.doneHandler(null);
@@ -58,6 +57,10 @@ class ListWatch {
     }
     doneHandler(err) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            if (this.request != null) {
+                this.request.destroy();
+                this.request = null;
+            }
             if (err) {
                 this.callbackCache[informer_1.ERROR].forEach((elt) => elt(err));
                 return;
@@ -70,7 +73,7 @@ class ListWatch {
             const list = result.body;
             deleteItems(this.objects, list.items, this.callbackCache[informer_1.DELETE].slice());
             this.addOrUpdateItems(list.items);
-            yield this.watch.watch(this.path, { resourceVersion: list.metadata.resourceVersion }, this.watchHandler.bind(this), this.doneHandler.bind(this));
+            this.request = yield this.watch.watch(this.path, { resourceVersion: list.metadata.resourceVersion }, this.watchHandler.bind(this), this.doneHandler.bind(this));
         });
     }
     addOrUpdateItems(items) {

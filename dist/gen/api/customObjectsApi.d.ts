@@ -71,6 +71,26 @@ export declare class CustomObjectsApi {
         body: object;
     }>;
     /**
+     * Deletes the specified cluster scoped custom object
+     * @param group the custom resource\&#39;s group
+     * @param version the custom resource\&#39;s version
+     * @param plural the custom object\&#39;s plural name. For TPRs this would be lowercase plural kind.
+     * @param name the custom object\&#39;s name
+     * @param gracePeriodSeconds The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     * @param orphanDependents Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object\&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     * @param propagationPolicy Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy.
+     * @param dryRun When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     * @param body
+     */
+    deleteClusterCustomObject(group: string, version: string, plural: string, name: string, gracePeriodSeconds?: number, orphanDependents?: boolean, propagationPolicy?: string, dryRun?: string, body?: V1DeleteOptions, options?: {
+        headers: {
+            [name: string]: string;
+        };
+    }): Promise<{
+        response: http.IncomingMessage;
+        body: object;
+    }>;
+    /**
      * Delete collection of cluster scoped custom objects
      * @param group The custom resource\&#39;s group name
      * @param version The custom resource\&#39;s version
@@ -83,26 +103,6 @@ export declare class CustomObjectsApi {
      * @param body
      */
     deleteCollectionClusterCustomObject(group: string, version: string, plural: string, pretty?: string, gracePeriodSeconds?: number, orphanDependents?: boolean, propagationPolicy?: string, dryRun?: string, body?: V1DeleteOptions, options?: {
-        headers: {
-            [name: string]: string;
-        };
-    }): Promise<{
-        response: http.IncomingMessage;
-        body: object;
-    }>;
-    /**
-     * Deletes the specified cluster scoped custom object
-     * @param group the custom resource\&#39;s group
-     * @param version the custom resource\&#39;s version
-     * @param plural the custom object\&#39;s plural name. For TPRs this would be lowercase plural kind.
-     * @param name the custom object\&#39;s name
-     * @param gracePeriodSeconds The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
-     * @param orphanDependents Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \&quot;orphan\&quot; finalizer will be added to/removed from the object\&#39;s finalizers list. Either this field or PropagationPolicy may be set, but not both.
-     * @param propagationPolicy Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy.
-     * @param dryRun When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
-     * @param body
-     */
-    deleteCollectionClusterCustomObject_1(group: string, version: string, plural: string, name: string, gracePeriodSeconds?: number, orphanDependents?: boolean, propagationPolicy?: string, dryRun?: string, body?: V1DeleteOptions, options?: {
         headers: {
             [name: string]: string;
         };
@@ -132,7 +132,7 @@ export declare class CustomObjectsApi {
         body: object;
     }>;
     /**
-     *
+     * Deletes the specified namespace scoped custom object
      * @param group the custom resource\&#39;s group
      * @param version the custom resource\&#39;s version
      * @param namespace The custom resource\&#39;s namespace
@@ -144,7 +144,7 @@ export declare class CustomObjectsApi {
      * @param dryRun When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      * @param body
      */
-    deleteCollectionNamespacedCustomObject_2(group: string, version: string, namespace: string, plural: string, name: string, gracePeriodSeconds?: number, orphanDependents?: boolean, propagationPolicy?: string, dryRun?: string, body?: V1DeleteOptions, options?: {
+    deleteNamespacedCustomObject(group: string, version: string, namespace: string, plural: string, name: string, gracePeriodSeconds?: number, orphanDependents?: boolean, propagationPolicy?: string, dryRun?: string, body?: V1DeleteOptions, options?: {
         headers: {
             [name: string]: string;
         };

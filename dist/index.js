@@ -13,4 +13,5 @@ tslib_1.__exportStar(require("./log"), exports);
 tslib_1.__exportStar(require("./informer"), exports);
 tslib_1.__exportStar(require("./top"), exports);
 tslib_1.__exportStar(require("./object"), exports);
+tslib_1.__exportStar(require("./cp"), exports);
 //# sourceMappingURL=index.js.map

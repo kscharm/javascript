@@ -596,7 +596,6 @@ class RbacAuthorizationV1alpha1Api {
     /**
      * delete collection of ClusterRole
      * @param pretty If \&#39;true\&#39;, then the output is pretty printed.
-     * @param allowWatchBookmarks allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server\&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      * @param _continue The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      * @param dryRun When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      * @param fieldSelector A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -607,10 +606,9 @@ class RbacAuthorizationV1alpha1Api {
      * @param propagationPolicy Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: \&#39;Orphan\&#39; - orphan the dependents; \&#39;Background\&#39; - allow the garbage collector to delete the dependents in the background; \&#39;Foreground\&#39; - a cascading policy that deletes all dependents in the foreground.
      * @param resourceVersion When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it\&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
      * @param timeoutSeconds Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-     * @param watch Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      * @param body
      */
-    deleteCollectionClusterRole(pretty, allowWatchBookmarks, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, watch, body, options = { headers: {} }) {
+    deleteCollectionClusterRole(pretty, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, body, options = { headers: {} }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const localVarPath = this.basePath + '/apis/rbac.authorization.k8s.io/v1alpha1/clusterroles';
             let localVarQueryParameters = {};
@@ -626,9 +624,6 @@ class RbacAuthorizationV1alpha1Api {
             let localVarFormParams = {};
             if (pretty !== undefined) {
                 localVarQueryParameters['pretty'] = models_1.ObjectSerializer.serialize(pretty, "string");
-            }
-            if (allowWatchBookmarks !== undefined) {
-                localVarQueryParameters['allowWatchBookmarks'] = models_1.ObjectSerializer.serialize(allowWatchBookmarks, "boolean");
             }
             if (_continue !== undefined) {
                 localVarQueryParameters['continue'] = models_1.ObjectSerializer.serialize(_continue, "string");
@@ -659,9 +654,6 @@ class RbacAuthorizationV1alpha1Api {
             }
             if (timeoutSeconds !== undefined) {
                 localVarQueryParameters['timeoutSeconds'] = models_1.ObjectSerializer.serialize(timeoutSeconds, "number");
-            }
-            if (watch !== undefined) {
-                localVarQueryParameters['watch'] = models_1.ObjectSerializer.serialize(watch, "boolean");
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarUseFormData = false;
@@ -714,7 +706,6 @@ class RbacAuthorizationV1alpha1Api {
     /**
      * delete collection of ClusterRoleBinding
      * @param pretty If \&#39;true\&#39;, then the output is pretty printed.
-     * @param allowWatchBookmarks allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server\&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      * @param _continue The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      * @param dryRun When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      * @param fieldSelector A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -725,10 +716,9 @@ class RbacAuthorizationV1alpha1Api {
      * @param propagationPolicy Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: \&#39;Orphan\&#39; - orphan the dependents; \&#39;Background\&#39; - allow the garbage collector to delete the dependents in the background; \&#39;Foreground\&#39; - a cascading policy that deletes all dependents in the foreground.
      * @param resourceVersion When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it\&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
      * @param timeoutSeconds Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-     * @param watch Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      * @param body
      */
-    deleteCollectionClusterRoleBinding(pretty, allowWatchBookmarks, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, watch, body, options = { headers: {} }) {
+    deleteCollectionClusterRoleBinding(pretty, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, body, options = { headers: {} }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const localVarPath = this.basePath + '/apis/rbac.authorization.k8s.io/v1alpha1/clusterrolebindings';
             let localVarQueryParameters = {};
@@ -744,9 +734,6 @@ class RbacAuthorizationV1alpha1Api {
             let localVarFormParams = {};
             if (pretty !== undefined) {
                 localVarQueryParameters['pretty'] = models_1.ObjectSerializer.serialize(pretty, "string");
-            }
-            if (allowWatchBookmarks !== undefined) {
-                localVarQueryParameters['allowWatchBookmarks'] = models_1.ObjectSerializer.serialize(allowWatchBookmarks, "boolean");
             }
             if (_continue !== undefined) {
                 localVarQueryParameters['continue'] = models_1.ObjectSerializer.serialize(_continue, "string");
@@ -777,9 +764,6 @@ class RbacAuthorizationV1alpha1Api {
             }
             if (timeoutSeconds !== undefined) {
                 localVarQueryParameters['timeoutSeconds'] = models_1.ObjectSerializer.serialize(timeoutSeconds, "number");
-            }
-            if (watch !== undefined) {
-                localVarQueryParameters['watch'] = models_1.ObjectSerializer.serialize(watch, "boolean");
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarUseFormData = false;
@@ -833,7 +817,6 @@ class RbacAuthorizationV1alpha1Api {
      * delete collection of Role
      * @param namespace object name and auth scope, such as for teams and projects
      * @param pretty If \&#39;true\&#39;, then the output is pretty printed.
-     * @param allowWatchBookmarks allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server\&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      * @param _continue The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      * @param dryRun When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      * @param fieldSelector A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -844,10 +827,9 @@ class RbacAuthorizationV1alpha1Api {
      * @param propagationPolicy Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: \&#39;Orphan\&#39; - orphan the dependents; \&#39;Background\&#39; - allow the garbage collector to delete the dependents in the background; \&#39;Foreground\&#39; - a cascading policy that deletes all dependents in the foreground.
      * @param resourceVersion When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it\&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
      * @param timeoutSeconds Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-     * @param watch Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      * @param body
      */
-    deleteCollectionNamespacedRole(namespace, pretty, allowWatchBookmarks, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, watch, body, options = { headers: {} }) {
+    deleteCollectionNamespacedRole(namespace, pretty, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, body, options = { headers: {} }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const localVarPath = this.basePath + '/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/roles'
                 .replace('{' + 'namespace' + '}', encodeURIComponent(String(namespace)));
@@ -868,9 +850,6 @@ class RbacAuthorizationV1alpha1Api {
             }
             if (pretty !== undefined) {
                 localVarQueryParameters['pretty'] = models_1.ObjectSerializer.serialize(pretty, "string");
-            }
-            if (allowWatchBookmarks !== undefined) {
-                localVarQueryParameters['allowWatchBookmarks'] = models_1.ObjectSerializer.serialize(allowWatchBookmarks, "boolean");
             }
             if (_continue !== undefined) {
                 localVarQueryParameters['continue'] = models_1.ObjectSerializer.serialize(_continue, "string");
@@ -901,9 +880,6 @@ class RbacAuthorizationV1alpha1Api {
             }
             if (timeoutSeconds !== undefined) {
                 localVarQueryParameters['timeoutSeconds'] = models_1.ObjectSerializer.serialize(timeoutSeconds, "number");
-            }
-            if (watch !== undefined) {
-                localVarQueryParameters['watch'] = models_1.ObjectSerializer.serialize(watch, "boolean");
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarUseFormData = false;
@@ -957,7 +933,6 @@ class RbacAuthorizationV1alpha1Api {
      * delete collection of RoleBinding
      * @param namespace object name and auth scope, such as for teams and projects
      * @param pretty If \&#39;true\&#39;, then the output is pretty printed.
-     * @param allowWatchBookmarks allowWatchBookmarks requests watch events with type \&quot;BOOKMARK\&quot;. Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server\&#39;s discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      * @param _continue The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \&quot;next key\&quot;.  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      * @param dryRun When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      * @param fieldSelector A selector to restrict the list of returned objects by their fields. Defaults to everything.
@@ -968,10 +943,9 @@ class RbacAuthorizationV1alpha1Api {
      * @param propagationPolicy Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: \&#39;Orphan\&#39; - orphan the dependents; \&#39;Background\&#39; - allow the garbage collector to delete the dependents in the background; \&#39;Foreground\&#39; - a cascading policy that deletes all dependents in the foreground.
      * @param resourceVersion When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it\&#39;s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
      * @param timeoutSeconds Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-     * @param watch Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      * @param body
      */
-    deleteCollectionNamespacedRoleBinding(namespace, pretty, allowWatchBookmarks, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, watch, body, options = { headers: {} }) {
+    deleteCollectionNamespacedRoleBinding(namespace, pretty, _continue, dryRun, fieldSelector, gracePeriodSeconds, labelSelector, limit, orphanDependents, propagationPolicy, resourceVersion, timeoutSeconds, body, options = { headers: {} }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const localVarPath = this.basePath + '/apis/rbac.authorization.k8s.io/v1alpha1/namespaces/{namespace}/rolebindings'
                 .replace('{' + 'namespace' + '}', encodeURIComponent(String(namespace)));
@@ -992,9 +966,6 @@ class RbacAuthorizationV1alpha1Api {
             }
             if (pretty !== undefined) {
                 localVarQueryParameters['pretty'] = models_1.ObjectSerializer.serialize(pretty, "string");
-            }
-            if (allowWatchBookmarks !== undefined) {
-                localVarQueryParameters['allowWatchBookmarks'] = models_1.ObjectSerializer.serialize(allowWatchBookmarks, "boolean");
             }
             if (_continue !== undefined) {
                 localVarQueryParameters['continue'] = models_1.ObjectSerializer.serialize(_continue, "string");
@@ -1025,9 +996,6 @@ class RbacAuthorizationV1alpha1Api {
             }
             if (timeoutSeconds !== undefined) {
                 localVarQueryParameters['timeoutSeconds'] = models_1.ObjectSerializer.serialize(timeoutSeconds, "number");
-            }
-            if (watch !== undefined) {
-                localVarQueryParameters['watch'] = models_1.ObjectSerializer.serialize(watch, "boolean");
             }
             Object.assign(localVarHeaderParams, options.headers);
             let localVarUseFormData = false;

@@ -1,3 +1,10 @@
+export declare enum ActionOnInvalid {
+    THROW = "throw",
+    FILTER = "filter"
+}
+export interface ConfigOptions {
+    onInvalidEntry: ActionOnInvalid;
+}
 export interface Cluster {
     readonly name: string;
     readonly caData?: string;
@@ -5,7 +12,7 @@ export interface Cluster {
     readonly server: string;
     readonly skipTLSVerify: boolean;
 }
-export declare function newClusters(a: any): Cluster[];
+export declare function newClusters(a: any, opts?: Partial<ConfigOptions>): Cluster[];
 export declare function exportCluster(cluster: Cluster): any;
 export interface User {
     readonly name: string;
@@ -19,7 +26,7 @@ export interface User {
     readonly username?: string;
     readonly password?: string;
 }
-export declare function newUsers(a: any): User[];
+export declare function newUsers(a: any, opts?: Partial<ConfigOptions>): User[];
 export declare function exportUser(user: User): any;
 export interface Context {
     readonly cluster: string;
@@ -27,5 +34,5 @@ export interface Context {
     readonly name: string;
     readonly namespace?: string;
 }
-export declare function newContexts(a: any): Context[];
+export declare function newContexts(a: any, opts?: Partial<ConfigOptions>): Context[];
 export declare function exportContext(ctx: Context): any;

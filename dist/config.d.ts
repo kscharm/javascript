@@ -2,7 +2,7 @@
 import https = require('https');
 import request = require('request');
 import * as api from './api';
-import { Cluster, Context, User } from './config_types';
+import { Cluster, ConfigOptions, Context, User } from './config_types';
 export declare class KubeConfig {
     private static authenticators;
     /**
@@ -32,10 +32,10 @@ export declare class KubeConfig {
     getCluster(name: string): Cluster | null;
     getCurrentUser(): User | null;
     getUser(name: string): User | null;
-    loadFromFile(file: string): void;
+    loadFromFile(file: string, opts?: Partial<ConfigOptions>): void;
     applytoHTTPSOptions(opts: https.RequestOptions): Promise<void>;
     applyToRequest(opts: request.Options): Promise<void>;
-    loadFromString(config: string): void;
+    loadFromString(config: string, opts?: Partial<ConfigOptions>): void;
     loadFromOptions(options: any): void;
     loadFromClusterAndUser(cluster: Cluster, user: User): void;
     loadFromCluster(pathPrefix?: string): void;
@@ -43,7 +43,7 @@ export declare class KubeConfig {
     addCluster(cluster: Cluster): void;
     addUser(user: User): void;
     addContext(ctx: Context): void;
-    loadFromDefault(): void;
+    loadFromDefault(opts?: Partial<ConfigOptions>): void;
     makeApiClient<T extends ApiType>(apiClientType: ApiConstructor<T>): T;
     makePathsAbsolute(rootDirectory: string): void;
     exportConfig(): string;

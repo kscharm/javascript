@@ -35,6 +35,7 @@ class Watch {
                 uri: url,
                 useQuerystring: true,
                 json: true,
+                pool: false,
             };
             yield this.config.applyToRequest(requestOptions);
             const stream = byline.createStream();

@@ -13,6 +13,7 @@ export class ListWatch<T extends KubernetesObject> implements ObjectCache<T>, In
     private readonly indexCache: { [key: string]: T[] } = {};
     private readonly callbackCache: { [key: string]: Array<ObjectCallback<T>> } = {};
     private request: RequestResult | null;
+    private stopped: boolean;
 
     public constructor(
         private readonly path: string,
@@ -26,6 +27,7 @@ export class ListWatch<T extends KubernetesObject> implements ObjectCache<T>, In
         this.callbackCache[ERROR] = [];
         this.request = null;
         this.resourceVersion = '';
+        this.stopped = false;
         if (autoStart) {
             this.doneHandler(null);
         }
@@ -80,7 +82,12 @@ export class ListWatch<T extends KubernetesObject> implements ObjectCache<T>, In
             this.request = null;
         }
         if (err) {
-            this.callbackCache[ERROR].forEach((elt: ObjectCallback<T>) => elt(err));
+            // On an error, the done handler is called twice with the same error, see details in
+            // watch.ts
+            if (!this.stopped) {
+                this.stopped = true;
+                this.callbackCache[ERROR].forEach((elt: ObjectCallback<T>) => elt(err));
+            }
             return;
         }
         // TODO: Don't always list here for efficiency

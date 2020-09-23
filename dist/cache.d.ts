@@ -14,6 +14,7 @@ export declare class ListWatch<T extends KubernetesObject> implements ObjectCach
     private readonly indexCache;
     private readonly callbackCache;
     private request;
+    private stopped;
     constructor(path: string, watch: Watch, listFn: ListPromise<T>, autoStart?: boolean);
     start(): Promise<void>;
     on(verb: string, cb: ObjectCallback<T>): void;

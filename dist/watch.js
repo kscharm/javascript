@@ -53,6 +53,10 @@ class Watch {
                 errOut = err;
                 done(err);
             });
+            // TODO: I don't love this, because both 'error' and 'close' call the done handler with the same error
+            // We should probably only do one or the other, but there's challenges because of async delivery and it's
+            // important to know if the close event is occurring because of an error. So for now, this needs to be
+            // handled in the client.
             stream.on('close', () => done(errOut));
             const req = this.requestImpl.webRequest(requestOptions, (error, response, body) => {
                 if (error) {

@@ -16,6 +16,7 @@ class ListWatch {
         this.callbackCache[informer_1.ERROR] = [];
         this.request = null;
         this.resourceVersion = '';
+        this.stopped = false;
         if (autoStart) {
             this.doneHandler(null);
         }
@@ -62,7 +63,12 @@ class ListWatch {
                 this.request = null;
             }
             if (err) {
-                this.callbackCache[informer_1.ERROR].forEach((elt) => elt(err));
+                // On an error, the done handler is called twice with the same error, see details in
+                // watch.ts
+                if (!this.stopped) {
+                    this.stopped = true;
+                    this.callbackCache[informer_1.ERROR].forEach((elt) => elt(err));
+                }
                 return;
             }
             // TODO: Don't always list here for efficiency
